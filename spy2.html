@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Undercover Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        button { font-size: 1.5em; margin: 10px; }
+        input { font-size: 1.2em; width: 60px; }
+        #word { font-size: 2em; margin: 30px; }
+    </style>
+</head>
+<body>
+    <h1>Undercover Game</h1>
+
+    <div id="setup">
+        <label>Enter number of players: </label>
+        <input type="number" id="playerCount" value="4" min="3">
+        <button onclick="generateWords()">Generate Words</button>
+    </div>
+
+    <div id="game" style="display:none;">
+        <h2 id="playerLabel"></h2>
+        <div id="word"></div>
+        <button onclick="showWord()">Show Word</button>
+        <button onclick="clearWord()">Clear</button>
+    </div>
+
+    <div id="restart" style="display:none;">
+        <button onclick="restartGame()">Start New Round</button>
+    </div>
+
+    <script>
+        const wordList = [
+            "Sun", "Moon", "Rain", "Snow", "Storm", "Fog",
+            "Cat", "Dog", "Rabbit", "Lion", "Tiger", "Elephant", "Giraffe", "Monkey",
+            "Apple", "Banana", "Pineapple", "Strawberry", "Watermelon", "Orange", "Mango",
+            "Hotel", "Hospital", "School", "Airport", "Library", "Museum", "Restaurant", "Theater",
+            "Doctor", "Dentist", "Veterinarian", "Teacher", "Police", "Firefighter", "Chef", "Engineer",
+            "Mountain", "Ocean", "River", "Forest", "Desert", "Valley", "Island", "Beach",
+            "Neighbor", "Friend", "Father", "Mother", "Brother", "Sister", "Uncle", "Aunt",
+            "Summer", "Winter", "Left", "Right", "Sweet", "Sour", "Light", "Dark", "Big", "Small", "Hot", "Cold",
+            "Car", "Bus", "Train", "Bicycle", "Airplane", "Helicopter", "Boat", "Subway",
+            "Love", "Hate", "Truth", "Lie", "Peace", "War", "Dream", "Nightmare"
+        ];
+
+        let words = [];
+        let currentPlayer = 0;
+
+        function generateWords() {
+            let N = parseInt(document.getElementById("playerCount").value);
+            if (isNaN(N) || N < 3) {
+                alert("Please enter a valid number of players (minimum 3)");
+                return;
+            }
+
+            const sameWord = wordList[Math.floor(Math.random() * wordList.length)];
+            let diffWord;
+            do {
+                diffWord = wordList[Math.floor(Math.random() * wordList.length)];
+            } while (diffWord === sameWord);
+
+            words = Array(N).fill(sameWord);
+            const spyIndex = Math.floor(Math.random() * N);
+            words[spyIndex] = diffWord;
+
+            currentPlayer = 0;
+            document.getElementById("setup").style.display = "none";
+            document.getElementById("game").style.display = "block";
+            updatePlayerLabel();
+        }
+
+        function updatePlayerLabel() {
+            document.getElementById("playerLabel").innerText = `Player ${currentPlayer+1}, it's your turn`;
+            document.getElementById("word").innerText = "";
+        }
+
+        function showWord() {
+            document.getElementById("word").innerText = words[currentPlayer];
+        }
+
+        function clearWord() {
+            document.getElementById("word").innerText = "";
+            currentPlayer++;
+            if (currentPlayer >= words.length) {
+                document.getElementById("game").style.display = "none";
+                document.getElementById("restart").style.display = "block";
+            } else {
+                updatePlayerLabel();
+            }
+        }
+
+        function restartGame() {
+            document.getElementById("restart").style.display = "none";
+            document.getElementById("setup").style.display = "block";
+        }
+    </script>
+</body>
+</html>
