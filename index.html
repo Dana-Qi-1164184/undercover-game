@@ -5,30 +5,80 @@
     <title>Undercover Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        button { font-size: 1.5em; margin: 10px; }
-        input { font-size: 1.2em; width: 60px; }
-        #word { font-size: 2em; margin: 30px; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #f1f8e9);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        h1 {
+            font-size: 42px;
+            color: #2e7d32;
+            margin-bottom: 40px;
+        }
+        input[type="number"] {
+            font-size: 28px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            border: 2px solid #81c784;
+            margin-right: 20px;
+            width: 120px;
+            text-align: center;
+        }
+        button {
+            font-size: 28px;
+            padding: 10px 30px;
+            border-radius: 15px;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #388e3c;
+        }
+        #word {
+            font-size: 40px;
+            margin: 30px;
+            font-weight: bold;
+            color: #3a6b3a;
+        }
     </style>
 </head>
 <body>
-    <h1>Undercover Game</h1>
+    <div class="container">
+        <h1>Undercover Game</h1>
 
-    <div id="setup">
-        <label>Enter number of players: </label>
-        <input type="number" id="playerCount" value="4" min="3">
-        <button onclick="generateWords()">Generate Words</button>
-    </div>
+        <div id="setup">
+            <label>Enter number of players: </label>
+            <input type="number" id="playerCount" value="4" min="3">
+            <button onclick="generateWords()">Generate Words</button>
+        </div>
 
-    <div id="game" style="display:none;">
-        <h2 id="playerLabel"></h2>
-        <div id="word"></div>
-        <button onclick="showWord()">Show Word</button>
-        <button onclick="clearWord()">Clear</button>
-    </div>
+        <div id="game" style="display:none;">
+            <h2 id="playerLabel"></h2>
+            <div id="word"></div>
+            <button onclick="showWord()">Show Word</button>
+            <button onclick="clearWord()">Clear</button>
+        </div>
 
-    <div id="restart" style="display:none;">
-        <button onclick="restartGame()">Start New Round</button>
+        <div id="restart" style="display:none;">
+            <button onclick="restartGame()">Start New Round</button>
+        </div>
     </div>
 
     <script>
@@ -98,3 +148,4 @@
     </script>
 </body>
 </html>
+
